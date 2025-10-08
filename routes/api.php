@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\LatestInvoiceController;
 use App\Http\Controllers\Api\InvoiceDetailsController;
 use App\Http\Controllers\Api\CompanyDataController;
+use App\Http\Controllers\Api\DocumentAnalysisController;
 use Illuminate\Support\Facades\Route;
 
 // Routes publiques
@@ -58,8 +59,10 @@ Route::get('/invoice/single/{id}', [SingleInvoiceController::class, 'show']);
 Route::get('/invoice/latest/{companyId}', [LatestInvoiceController::class, 'show']);
 Route::get('/invoice/details/{id}', [InvoiceDetailsController::class, 'show']);
 // chat
-Route::get('/company/{slug}', [CompanyRagDataController::class, 'show']);
+Route::get('/company/{slug}', [CompanyDataController::class, 'show']);
 Route::post('/chat', [ChatController::class, 'chat']);
+// file analysis
+Route::post('/analyze-file', [DocumentAnalysisController::class, 'analyze']);
 
 
 // Routes protégées par Sanctum
