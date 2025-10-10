@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\LatestInvoiceController;
 use App\Http\Controllers\Api\InvoiceDetailsController;
 use App\Http\Controllers\Api\CompanyDataController;
 use App\Http\Controllers\Api\DocumentAnalysisController;
+use App\Http\Controllers\Api\BasicUserController;
+use App\Http\Controllers\Api\AdminUserController;
 use Illuminate\Support\Facades\Route;
 
 // Routes publiques
@@ -63,7 +65,12 @@ Route::get('/company/{slug}', [CompanyDataController::class, 'show']);
 Route::post('/chat', [ChatController::class, 'chat']);
 // file analysis
 Route::post('/analyze-file', [DocumentAnalysisController::class, 'analyze']);
-
+// basic-user
+Route::get('/basic-user', [BasicUserController::class, 'index']);
+Route::get('/basic-user/{id}', [BasicUserController::class, 'show']);
+// admin-user
+Route::get('/admin-user', [AdminUserController::class, 'index']);
+Route::get('/admin-user/{id}', [AdminUserController::class, 'show']);
 
 // Routes protégées par Sanctum
 Route::middleware('auth:sanctum')->group(function () {
@@ -106,4 +113,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // invoice
     Route::post('/invoice', [InvoiceController::class, 'store']);
     Route::patch('/invoice/single/{id}', [SingleInvoiceController::class, 'update']);
+    // basic-user
+    Route::patch('/basic-user/{id}', [BasicUserController::class, 'update']);
+    Route::put('/basic-user/{id}', [BasicUserController::class, 'update']);
+    Route::delete('/basic-user/{id}', [BasicUserController::class, 'destroy']);
+    // admin-user
+    Route::patch('/admin-user/{id}', [AdminUserController::class, 'update']);
+    Route::put('/admin-user/{id}', [AdminUserController::class, 'update']);
 });
